@@ -4,7 +4,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    // Adding which logger options will be displayed on the console
+    logger: ['error', 'warn', 'debug'],
+  });
 
   // Enables global pipe validation.
   app.useGlobalPipes(new ValidationPipe());

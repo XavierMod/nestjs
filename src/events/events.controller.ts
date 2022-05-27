@@ -7,6 +7,8 @@ import {
   Delete,
   Get,
   HttpCode,
+  Logger,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Patch,
@@ -23,6 +25,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 // Controllers should always be as simple as possible
 @Controller('/events')
 export class EventsController {
+  // Creating a new logger
+  private readonly logger = new Logger(EventsController.name);
   // Repository methods are always async. When using them, all controller methods should be async.
   constructor(
     @InjectRepository(Event)
@@ -31,7 +35,11 @@ export class EventsController {
   // Decorators specity the HTTP verb/path of the operation
   @Get()
   async findAll() {
-    return await this.repository.find();
+    // * Using the added logger
+    this.logger.log('Hit the findAll route');
+    const events = await this.repository.find();
+    this.logger.debug(`Found ${events.length} events`);
+    return events;
   }
 
   @Get('/practice')
@@ -71,6 +79,12 @@ export class EventsController {
   // This pipe transforms the param to a number. There are several other pipes which can be useful
   async findOne(@Param('id' /** ParseIntPipe - ENABLED GLOBALLY */) id) {
     const event = await this.repository.findOne(id);
+
+    // * Adding exceptions
+    if (!event) {
+      throw new NotFoundException();
+    }
+
     return event;
   }
 

@@ -1,18 +1,12 @@
 Changelog for this branch:
 
-- Creating a custom module with `nest generate module events`
-- Reorganizing directory into different folders/modules
+- Add `npm i --save @nestjs/config`
+- Adding and configuring `.env` variables
+- Creating a new config folder
+- Adding loggers
+- Adding exceptions
 # Notes
 
-### Dependency Injection
-
-In software engineering, dependency injection is a design pattern in which an object receives other objects that it depends on. A form of inversion of control, dependency injection aims to separate the concerns of constructing objects and using them, leading to loosely coupled programs
-
-Code is decoupled, which makes testing easier. The app's module can import other modules, and have controller registration. Providers are classes that use dependency injection. 
-
-### Providers
-
-Providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers, and so on. The main idea of a provider is that it can be injected as a dependency; this means objects can create various relationships with each other, and the function of "wiring up" instances of objects can largely be delegated to the Nest runtime system.
 
 ## Installation
 
