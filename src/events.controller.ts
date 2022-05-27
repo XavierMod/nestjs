@@ -1,3 +1,6 @@
+/**
+ * A controller is part of the MVC (Model – View – Controller) design pattern. The model manages the data, logic and rules of the application.
+ */
 import {
   Body,
   Controller,
