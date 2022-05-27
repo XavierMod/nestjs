@@ -1,23 +1,13 @@
 Changelog for this branch:
 
-- Includes pipe data validation
-- Adding `npm i --save class-validator class-transformer`, which required by some of the pipes used, as it adds new decorators.
-- Adding global pipes validation on the `main.js` file
-- Adding new decorators on the event entity
+- Add `npm install --save @nestjs/swagger swagger-ui-express`
+- Adding OpenAPI/Swagger functionality on `http://localhost:3000/api`
 
 # Notes
 
-A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface.
+### OpenAPI
 
-Pipes have two typical use cases:
-
-- Transformation: transform input data to the desired form (e.g., from string to integer)
-- Validation: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect
-
-Pipes can be configured in two ways:
-
-- Globally: By editing the main.js file, all pipes will be available to use everywhere
-- By group, which will allow to use group pipes.
+The OpenAPI specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators.
 
 
 ## Installation
