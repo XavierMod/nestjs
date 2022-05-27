@@ -2,6 +2,8 @@ Changelog for this branch:
 
 - Creating a custom module with `nest generate module events`
 - Reorganizing directory into different folders/modules
+- Adding providers
+
 # Notes
 
 ### Dependency Injection
