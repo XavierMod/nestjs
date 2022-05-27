@@ -1,14 +1,18 @@
 Changelog for this branch:
 
-- Add `npm install --save @nestjs/swagger swagger-ui-express`
-- Adding OpenAPI/Swagger functionality on `http://localhost:3000/api`
-
+- Creating a custom module with `nest generate module events`
+- Reorganizing directory into different folders/modules
 # Notes
 
-### OpenAPI
+### Dependency Injection
 
-The OpenAPI specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators.
+In software engineering, dependency injection is a design pattern in which an object receives other objects that it depends on. A form of inversion of control, dependency injection aims to separate the concerns of constructing objects and using them, leading to loosely coupled programs
 
+Code is decoupled, which makes testing easier. The app's module can import other modules, and have controller registration. Providers are classes that use dependency injection. 
+
+### Providers
+
+Providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers, and so on. The main idea of a provider is that it can be injected as a dependency; this means objects can create various relationships with each other, and the function of "wiring up" instances of objects can largely be delegated to the Nest runtime system.
 
 ## Installation
 

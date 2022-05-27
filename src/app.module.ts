@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Event } from './event.entity';
-import { EventsController } from './events.controller';
+import { Event } from './events/event.entity';
+import { EventsModule } from './events/events.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+// Modules are boxes with specific tools. They divide app in several pieces.
 
 @Module({
   imports: [
@@ -23,10 +27,15 @@ import { EventsController } from './events.controller';
       // ! Should not be true in prod
       synchronize: true,
     }),
-    // Makes a repository for the Event entity
-    // * Needs to be do it every time
-    TypeOrmModule.forFeature([Event]),
+    EventsModule,
   ],
-  controllers: [EventsController],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: 'APP_NAME',
+      useValue: 'Nest Events Backend',
+    },
+  ],
 })
 export class AppModule {}
