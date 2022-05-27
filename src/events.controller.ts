@@ -8,8 +8,10 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateEventDto } from './create-event.dto';
 import { Event } from './event.entity';
@@ -65,13 +67,18 @@ export class EventsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id) {
+  // * Adding ParseIntPipe
+  // This pipe transforms the param to a number. There are several other pipes which can be useful
+  async findOne(@Param('id' /** ParseIntPipe - ENABLED GLOBALLY */) id) {
     const event = await this.repository.findOne(id);
     return event;
   }
 
   @Post()
-  async create(@Body() input: CreateEventDto) {
+  async create(
+    @Body(/** new ValidationPipe({ groups: ['create'] }) */)
+    input: CreateEventDto,
+  ) {
     // Because CreateEvent is now a Dto, its internal properties are now available
     // e.g. input.name
     return await this.repository.save({
@@ -82,8 +89,13 @@ export class EventsController {
     });
   }
 
-  @Patch()
-  async update(@Param('id') id, @Body() input: UpdateEventDto) {
+  @Patch(':id')
+  async update(
+    @Param('id') id,
+    //        Example of how to use group pipes validation
+    @Body(/** new ValidationPipe({ groups: ['update'] }) */)
+    input: UpdateEventDto,
+  ) {
     // All the properties will be optional, because it's using a PartialType
     const event = await this.repository.findOne(id);
 
